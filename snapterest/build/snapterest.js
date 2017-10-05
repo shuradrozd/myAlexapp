@@ -20949,18 +20949,140 @@ if (process.env.NODE_ENV === 'production') {
 },{"./cjs/react.development.js":30,"./cjs/react.production.min.js":31,"_process":19}],33:[function(require,module,exports){
 arguments[4][25][0].apply(exports,arguments)
 },{"dup":25}],34:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
+var my_news = [];
+// let my_news = [
+//   {
+//   author: 'Саша Печкин',
+//   text: 'В четверг, четвертого числа...'
+//   },
+//   {
+//   author: 'Просто Вася',
+//   text: 'Считаю, что $ должен стоить 35 рублей!'
+//   },
+//   {
+//   author: 'Гость',
+//   text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000'
+//   }
+// ];
 
-var createListItemElement = React.createFactory('li');
-var listItemElement1 = createListItemElement({ className: 'item-1',
-  key: 'item-1' }, 'Item 1');
-var listItemElement2 = createListItemElement({ className: 'item-2',
-  key: 'item-2' }, 'Item 2');
-var listItemElement3 = createListItemElement({ className: 'item-3',
-  key: 'item-3' }, 'Item 3');
-var reactFragment = [listItemElement1, listItemElement2, listItemElement3];
-var listOfItems = React.createElement('ul', { className: 'list-ofitems' }, reactFragment);
-ReactDOM.render(listOfItems, document.getElementById('react-application'));
+var News = function (_React$Component) {
+  _inherits(News, _React$Component);
+
+  function News() {
+    _classCallCheck(this, News);
+
+    return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).apply(this, arguments));
+  }
+
+  _createClass(News, [{
+    key: 'render',
+    value: function render() {
+
+      var data = this.props.data;
+      var newsTemplate = void 0;
+      if (data.length !== 0) {
+        newsTemplate = data.map(function (item, index) {
+          return React.createElement(
+            'div',
+            { key: index },
+            React.createElement(
+              'p',
+              { className: 'news_author' },
+              item.author,
+              ':'
+            ),
+            React.createElement(
+              'p',
+              { className: 'news_text' },
+              item.text
+            )
+          );
+        });
+      } else {
+        newsTemplate = React.createElement(
+          'p',
+          null,
+          'No any news'
+        );
+      }
+
+      return React.createElement(
+        'div',
+        { className: 'News' },
+        newsTemplate,
+        React.createElement(
+          'strong',
+          null,
+          'All news: ',
+          data.length
+        )
+      );
+    }
+  }]);
+
+  return News;
+}(React.Component);
+
+var Comments = function (_React$Component2) {
+  _inherits(Comments, _React$Component2);
+
+  function Comments() {
+    _classCallCheck(this, Comments);
+
+    return _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).apply(this, arguments));
+  }
+
+  _createClass(Comments, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'comments' },
+        'No News No Comments'
+      );
+    }
+  }]);
+
+  return Comments;
+}(React.Component);
+
+var App = function (_React$Component3) {
+  _inherits(App, _React$Component3);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'app' },
+        'Hello World',
+        React.createElement(News, { data: my_news }),
+        React.createElement(Comments, null)
+      );
+    }
+  }]);
+
+  return App;
+}(React.Component);
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('react-application'));
 
 },{"react":32,"react-dom":28}]},{},[34]);
